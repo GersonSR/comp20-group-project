@@ -1,5 +1,5 @@
 # Find the Way! 
-### By: Caleb Lucas-Foley, Chris Phifer, Gerson Rubio
+### By: Caleb Lucas-Foley, Chris Phifer, Gerson Salmeron Rubio, Ashton Stephens
 ### Date: October 28, 2016
 
 ## Problem Statement
