@@ -29,7 +29,11 @@ spend time on making the game more fun, accessible, and interesting.
    2. Server-side persistence: Compete with friends and other players around
       the world! See how good you are compared to others at guess what routes
       are fastest.
-   3. 
+   3. Client-side persistence: Keep track of your most recent high scores so
+      you can work towards beating them!
+   4. Charts and graphs: See the performance of people around the world
+      relative to you! See how your performance changes over time, and how it
+      compares to the performance of others. 
 
 ## Data
 The only data important to this application is geolocation information (to play
