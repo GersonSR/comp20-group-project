@@ -83,4 +83,5 @@ transportation in mind.
 
 ## Mockups
 
-See the image FTW.png. 
+![The main page](ftw.png)
+![An example leaderboard page](leaderboard.png)
