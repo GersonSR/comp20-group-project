@@ -38,11 +38,21 @@ spend time on making the game more fun, accessible, and interesting.
 ## Data
 The only data important to this application is geolocation information (to play
 close to one's actual location), and information about scores. We'll need some
-form of authentication in order to identify users uniquely when storing score
-data (something like Facebook authentication). 
+form of authentication in order to identify users uniquely when storing global score data (something like Facebook authentication), and localStorage or
+cookies for storing the user's current high score list. 
 
 ## Algorithms / Special Techniques
+To find the shortest path between the two points, we make use of the Google
+Directions API, which has built-in support for finding the optimal path between
+two points given some number of factors (e.g. mode of transportation,
+construction, and various other factors affecting travel times). For our
+purposes, we assume that the mode of transportation is walking.
+
+To score a user's chosen path, we take it's relative error when compared to the
+path chosen by Google. This is a simple system that is sensible given that we
+always assume that the paths are chosen with walking as the mode of
+transportation in mind. 
 
 ## Mockups
 
-See the document . 
+See the image FTW.png. 
