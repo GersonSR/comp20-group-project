@@ -17,6 +17,7 @@ with options:
      * Play Hard Game
      * Play Around You
      * View Scores / Statistics
+     
 Choosing to play an easy game puts two points on a small section of the map of
 either Chicago or New York (grids are easiest!). Choosing a hard game puts the
 two points down in Boston and the surrounding area, where there are hardly any
