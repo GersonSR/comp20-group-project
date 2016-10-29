@@ -8,6 +8,33 @@ Do you think you have what it takes to do as well as Google at guessing the
 best route between two real locations? Try our game and find out if you
 have a knack for solving the travelling salesman problem by inspection!
 
+## Use Scenario
+When a user visits the site, they'll be encouraged to log in (in order to save
+their scores with a personal identifier). They'll be asked to use their
+location, and once they give permission for us to use it, they'll be presented
+with options:
+     - Play Easy Game
+     - Play Hard Game
+     - Play Around You
+     - View Scores / Statistics
+Choosing to play an easy game puts two points on a small section of the map of
+either Chicago or New York (grids are easiest!). Choosing a hard game puts the
+two points down in Boston and the surrounding area, where there are hardly any
+straight roads. Playing around you entails using geolocation data to pick two
+points close to the user. Viewing scores and statistics will allow the user to
+view global high scores (and their relative position among those scores), look
+at statistics about their gameplay and the gameplay of players around the
+world, and send these statistics to various social media platforms.
+
+Game play is easily described as follows: Two points are put on the map within
+a certain radius of the randomly chosen center (or geolocation of the user).
+A random path between these points is displayed that the user can then edit by
+dragging it. The user confirms their path, and then calculations are run to
+determine the relative error with respect to the Google route. This score is
+stored locally and globally as appropriate based on whether the user has chosen
+to authenticate or not, and relevant statstical data is updated based on the
+new information. 
+
 ## Our Solution
 To implement this game, we will make use of the Google maps API, the Google
 directions API, a backend technology (Node.js), geolocation, and various other
@@ -38,7 +65,8 @@ spend time on making the game more fun, accessible, and interesting.
 ## Data
 The only data important to this application is geolocation information (to play
 close to one's actual location), and information about scores. We'll need some
-form of authentication in order to identify users uniquely when storing global score data (something like Facebook authentication), and localStorage or
+form of authentication in order to identify users uniquely when storing global
+score data (something like Facebook authentication), and localStorage or
 cookies for storing the user's current high score list. 
 
 ## Algorithms / Special Techniques
