@@ -9,10 +9,8 @@ best route between two real locations? Try our game and find out if you
 have a knack for solving the travelling salesman problem by inspection!
 
 ## Use Scenario
-When a user visits the site, they'll be encouraged to log in (in order to save
-their scores with a personal identifier). They'll be asked to use their
-location, and once they give permission for us to use it, they'll be presented
-with options:
+When a user visits the site, they'll be asked to use their location, and once
+they give permission for us to use it, they'll be presented with options:
 * Play Easy Game
 * Play Hard Game
 * Play Around You
@@ -33,8 +31,8 @@ A random path between these points is displayed that the user can then edit by
 dragging it. The user confirms their path, and then calculations are run to
 determine the relative error with respect to the Google route. This score is
 stored locally and globally as appropriate based on whether the user has chosen
-to authenticate or not, and relevant statstical data is updated based on the
-new information. 
+to provide an identifier  or not, and relevant statstical data is updated
+based on the new information. 
 
 ## Our Solution
 To implement this game, we will make use of the Google maps API, the Google
@@ -66,9 +64,10 @@ spend time on making the game more fun, accessible, and interesting.
 ## Data
 The only data important to this application is geolocation information (to play
 close to one's actual location), and information about scores. We'll need some
-form of authentication in order to identify users uniquely when storing global
-score data (something like Facebook authentication), and localStorage or
-cookies for storing the user's current high score list. 
+way of identifying users (for global score information), and localStorage or
+cookies for storing the user's current high score list on their own machine.
+To prevent cheating, we'll encrypt or encode the score data in some way that
+is difficult for the user to predict. 
 
 ## Algorithms / Special Techniques
 To find the shortest path between the two points, we make use of the Google
