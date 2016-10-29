@@ -13,10 +13,10 @@ When a user visits the site, they'll be encouraged to log in (in order to save
 their scores with a personal identifier). They'll be asked to use their
 location, and once they give permission for us to use it, they'll be presented
 with options:
-     - Play Easy Game
-     - Play Hard Game
-     - Play Around You
-     - View Scores / Statistics
+     * Play Easy Game
+     * Play Hard Game
+     * Play Around You
+     * View Scores / Statistics
 Choosing to play an easy game puts two points on a small section of the map of
 either Chicago or New York (grids are easiest!). Choosing a hard game puts the
 two points down in Boston and the surrounding area, where there are hardly any
