@@ -3,10 +3,10 @@
 ### Date: October 28, 2016
 
 ## Problem Statement
-It's a difficult problem to find the shortest path between two points.
+It's a difficult problem to find the most efficient route between two points.
 Do you think you have what it takes to do as well as Google at guessing the
-shortest path between two real locations? Try our game and find out if you
-have a knack for solving the travelling salesman problem by inspection. 
+best route between two real locations? Try our game and find out if you
+have a knack for solving the travelling salesman problem by inspection!
 
 ## Our Solution
 To implement this game, we will make use of the Google maps API, the Google
