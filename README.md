@@ -85,3 +85,7 @@ transportation in mind.
 
 ![The main page](ftw.png)
 ![An example leaderboard page](leaderboard.png)
+
+## Comments by Ming
+* A fun idea.
+* Be careful on what the scope of location means. I am thinking this idea will not work well inside of a building or in a small park like the Boston Commons (e.g., Frog Pond to the Swan Boats)?
