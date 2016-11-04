@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="initial-scale=1.0 user-scalable=no"/>
+	<title>Find the Way!</title>
+	<link rel="stylesheet" href="style.css"/>
+	<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?callback=initMap" async defer></script>
+	<script async defer>
+		// temporary -- TODO move into its own file
+		var map;
+		function initMap() {
+			var options = {
+				zoom: 16,
+				center: {lat: 42.358056, lng: -71.063611},
+				mapTypeId: google.maps.MapTypeId.ROADMAP
+			};
+			map = new google.maps.Map(document.getElementById('map'), options);
+		}
+	</script>
+</head>
+<body>
+	<header id="header"><h2>Find the Way!</h2></header>
+	<nav id="sidebar"></nav>
+	<div id="map"></div>
+	<footer id="footer"></footer>
+</body>
