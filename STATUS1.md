@@ -12,7 +12,11 @@
     Heroku wants is currently missing (e.g. name, repository, etc.).
   * Procfile ready for Heroku deployment.
 * Client Side:
-  
+  * Seperations of concerned was created, seperating the map creation data from 
+    the index html page and the css page was made to fit the creation of the google 
+    map.
+  * Creation of a google marker in which it would force the google map to the location
+    of the the client, and provide a waypoint pointing to the client on creation.
 
 ## Hurdles Overcome
 * No significant hurdles encountered yet. The next steps will likely be more problematic.
@@ -26,3 +30,4 @@
   * Make sure the user isn't trying to hack MongoDB!
 * Data visualization (client side)
   * Make a simple leaderboard that shows the top scores (either on a separate page or in a "pop-up")
+* Start creating manners of which to represent data to client such as scoreboards etc.
