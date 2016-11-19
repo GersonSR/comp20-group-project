@@ -1,0 +1,11 @@
+{
+  "name": "stark-shore-93243",
+  "version": "0.0.1",
+  "description": "Find the Way, a fun path-finding game.",
+  "dependencies": {
+    "body-parser": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "mongodb": "latest"
+  }
+}
