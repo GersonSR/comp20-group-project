@@ -36,3 +36,5 @@ app.get('/high-scores', cors(), function(req, resp) {
 	/* GET route to get back global high scores data available to everyone. */
 	/* Content returned in JSON format to be used by client to render nicely. */
 });
+
+
