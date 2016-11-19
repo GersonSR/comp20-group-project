@@ -15,8 +15,7 @@
   
 
 ## Hurdles Overcome
-* Preserved extensibility
-* Avoided dissociation
+* No significant hurdles encountered yet. The next steps will likely be more problematic.
 
 ## Next Steps
 * Begin to integrate Google's Directions API (client side)
