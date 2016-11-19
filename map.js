@@ -54,3 +54,5 @@ function renderMap() {
 		infowindow.open(map, marker);
 	});
 }
+
+//IN SAME FILE FOR NOW
