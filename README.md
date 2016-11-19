@@ -17,7 +17,10 @@
     * Display a graphical visualization of the scores
 * Server Side
   * Accept score records
+    * Store scores, by location, time, and username, in a database (NodeJS)
   * Validate a submitted score to make sure it wasn't a cheat
+    * Maybe this uses encryption on the client side
+    * Maybe the random points are sent from the server instead of generated locally on the client
   * Send scores to the front-end
   * Publish to Heroku (final step)
 
