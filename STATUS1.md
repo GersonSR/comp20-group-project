@@ -5,10 +5,12 @@
   * Created skeleton server.js file. Decided on two completely necessary routes,
     with comments outlining plans for some more / changes to be made if we
     decide on a more server-oriented model.
+  * Identified early version data model to be used: Constructed early version
+    of the MongoDB document we probably want to store.
   * Initial setup for CORS, MongoDB connections, parameter parsing, etc.
   * package.json contains all currently known dependencies, though stuff that
-    Heroku wants is currently missing (e.g. name, repository, etc.)
-  * Procfile ready for Heroku deployment
+    Heroku wants is currently missing (e.g. name, repository, etc.).
+  * Procfile ready for Heroku deployment.
 * Client Side:
   
 
