@@ -2,6 +2,25 @@
 ### By: Caleb Lucas-Foley, Chris Phifer, Gerson Salmeron Rubio, Ashton Stephens
 ### Date: October 28, 2016
 
+## Features to Add
+* Client Side
+  * A visually pleasing layout and graphics
+  * Map features:
+    * Pick two random points, a reasonable distance apart, within a city
+    * Find the best walking path between them (using Google's Directions API)
+    * Let the user draw a path on the map between the two points
+    * Evaluate the distance difference between the routes; assign a fair score
+  * Leaderboard features:
+    * Submit a username
+    * Submit a username, score, and game mode data
+    * Display the high scores
+    * Display a graphical visualization of the scores
+* Server Side
+  * Accept score records
+  * Validate a submitted score to make sure it wasn't a cheat
+  * Send scores to the front-end
+  * Publish to Heroku (final step)
+
 ## Problem Statement
 It's a difficult problem to find the most efficient route between two points.
 Do you think you have what it takes to do as well as Google at guessing the
