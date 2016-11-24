@@ -31,3 +31,6 @@
 * Data visualization (client side)
   * Make a simple leaderboard that shows the top scores (either on a separate page or in a "pop-up")
 * Start creating manners of which to represent data to client such as scoreboards etc.
+
+#Comments by Ming
+* Focus on the client side stuff first.  Security of server side is a never-ending battle.  Remember, you are not aiming for perfection in the semester group project.
