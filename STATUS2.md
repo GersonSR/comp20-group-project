@@ -2,10 +2,11 @@
 
 ## New Tasks Accomplished
 * Client Side:
-  * Generating random nodes a good distance apart, as the start and destination for the path drawing
-
+  * Generating random nodes, as the start and destination for the path drawing
+  * connection to additional google libraries
+  
 ## Hurdles Overcome
-* 
+* getting LatLng into random result selecter
 
 ## Next Steps
 * Allow the user to drag or draw a path between the two points
