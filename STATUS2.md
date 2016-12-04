@@ -2,11 +2,13 @@
 
 ## New Tasks Accomplished
 * Client Side:
-  * Generating random nodes, as the start and destination for the path drawing
-  * connection to additional google libraries
+  * Generating random nodes and selecting two of them at random given input values
+
   
 ## Hurdles Overcome
-* getting LatLng into random result selecter
+* Client Side:
+  * making dealing with ajax a bit easier with a dependable return to the 
+  	function that finds places 
 
 ## Next Steps
 * Allow the user to drag or draw a path between the two points
