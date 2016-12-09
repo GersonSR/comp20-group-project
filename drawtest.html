@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="initial-scale=1.0 user-scalable=no"/>
+	<title>Find the Way!</title>
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&libraries=places,geometry,drawing,geocoding,directions"></script>
+	<script type="text/javascript" src="drawtest.js"></script>
+</head>
+<body onload="init()">
+	<header id="header"><h2>Find the Way!</h2></header>
+	<nav id="sidebar">
+		<p><button onclick="resetRouteDrawing()">Reset Route</button></p>
+		<p><button onclick="smoothRoute(23)">Smooth Route for Directions</button> (max of 23 waypoints)</p>
+		<p><button onclick="smoothRoute(12)">Smooth Route for Vertex Snapping</button> (max of 12 waypoints)</p>
+		<p><button onclick="snapRouteToRoads()">Snap Vertices to Roads</button></p>
+		<p><button onclick="getDirectionsAlongRoute()">Get Directions Along Route</button></p>
+	</nav>
+	<div id="map"></div>
+	<footer id="footer"></footer>
+</body>
