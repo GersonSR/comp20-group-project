@@ -108,6 +108,7 @@ function endRouteDrawing() {
 	currentlyDrawing = false;
 }
 
+// Unused
 // Smooth out kinks in the route, leaving at most numWaypoints points, including the
 // origin and destination
 function smoothRoute(numWaypoints) {
@@ -124,6 +125,7 @@ function smoothRoute(numWaypoints) {
 	drawnRoute.setPath(newPath);
 }
 
+// Unused
 // Returns the nearest road to a given LatLng, as a LatLng
 // Uses walking directions, so the nearest road may be a footpath
 //
@@ -143,6 +145,7 @@ function nearestRoadTo(location) {
 	});
 }
 
+// Unused
 function getDirectionsAlongRoute() {
 	waypointsArray = [];
 	drawnRoute.getPath().forEach(function(location) {
@@ -166,6 +169,7 @@ function getDirectionsAlongRoute() {
 	});
 }
 
+// Unused
 function snapRouteToRoads() {
 	var path = drawnRoute.getPath();
 	var length = path.getLength();
@@ -192,4 +196,45 @@ function snapRouteToRoads() {
 		destination: path.getAt(i),
 		travelMode: google.maps.DirectionsTravelMode.WALKING
 	}, snapToRoad);
+}
+
+// Calculate the similarity between the optimal route (Google Directions)
+// and the user-drawn route
+function compareRouteToOptimal() {
+	directionsService.route({
+		origin: origin,
+		destination: destination,
+		travelMode: google.maps.DirectionsTravelMode.WALKING
+	}, function(response, status) {
+		if (status == google.maps.DirectionsStatus.OK) {
+			// Set up google's route
+			optimalRoutePath = google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline);
+
+			// merge the two routes into a polygon
+			var routeLoop = new google.maps.MVCArray;
+			drawnRoute.getPath().forEach(function(node, index) {
+				routeLoop.push(node);
+			});
+			// add the nodes from Google Directions in reverse order
+			var optimalLength = optimalRoutePath.length;
+			for (var i = optimalLength - 1; i >= 0; --i) {
+				routeLoop.push(optimalRoutePath[i]);
+			}
+			// calculate the area of the loop
+			var area = google.maps.geometry.spherical.computeArea(routeLoop);
+			alert('Area: '+ area + ' square meters');
+			
+			// Now make the polygon to display
+			// var betweenRoutes = new google.maps.Polygon({
+			// 	paths: [routeLoop],
+			// 	geodesic: true,
+			// 	visible: true,
+			// 	fillColor: 'cyan',
+			// 	fillOpacity: 0.5,
+			// 	strokeWeight: 3,
+			// 	strokeColor: 'cyan',
+			// 	map: map
+			// });
+		}
+	});
 }
