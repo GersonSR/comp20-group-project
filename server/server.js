@@ -62,13 +62,12 @@ app.post('/submit', cors(), function(req, resp) {
 	 var game-mode = req.body.game-mode;
 	 var score     = req.body.score;
 
-	 /* Assert all the fields were sent */
 	 if (username != undefined && game-mode != undefined && score != undefined &&
 	 	                         (game-mode === "easy" || game-mode === "hard" ||
 	 	                       	  game-mode === "local")) {
 	 	username  = username.replace(/[^\w\s]/gi, '');
 	 	game-mode = game-mode.replace(/[^\w\s]/gi, '');
-	 	score     = Number(score); /* TODO: MAKE SURE THEY AREN'T FILTHY CHEATERS */
+	 	score     = Number(score); /* TODO: MAKE SURE THEY AREN'T FILTHY CHEATERS BY CALCULATING SCORE ON SERVER-SIDE */
 
 	 	/* Build document to store in database */
 	 	var d = new Date();
