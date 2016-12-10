@@ -63,7 +63,9 @@ app.post('/submit', cors(), function(req, resp) {
 	 var score     = req.body.score;
 
 	 /* Assert all the fields were sent */
-	 if (username != undefined && game-mode != undefined && score != undefined) {
+	 if (username != undefined && game-mode != undefined && score != undefined &&
+	 	                         (game-mode === "easy" || game-mode === "hard" ||
+	 	                       	  game-mode === "local")) {
 	 	username  = username.replace(/[^\w\s]/gi, '');
 	 	game-mode = game-mode.replace(/[^\w\s]/gi, '');
 	 	score     = Number(score); /* TODO: MAKE SURE THEY AREN'T FILTHY CHEATERS */
@@ -74,7 +76,7 @@ app.post('/submit', cors(), function(req, resp) {
 	 		"username": username,
 	 		"game-mode": game-mode,
 	 		"score": score,
-	 		"time": d.toUTCString(),
+	 		"time": d.toUTCString(), /* Makes the date and time look reasonable */
 	 	};
 
 	 	db.collection('user-data', function(err, coll) {
