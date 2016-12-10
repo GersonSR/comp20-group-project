@@ -25,6 +25,7 @@ function get_data() {
 
 /* Expects array of objects */
 function build_table(score_data) {
+	var leaderboard = document.getElementById("leaderboard");
 	
 }
 
