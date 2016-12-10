@@ -57,43 +57,6 @@ app.post('/submit', cors(), function(req, resp) {
 	 * If not, no data will be stored. Input validation FTW!
 	 */
 
-	 /* Get out all request parameters */
-	 var username  = req.body.username;
-	 var game-mode = req.body.game-mode;
-	 var score     = req.body.score;
-
-	 /* Assert all the fields were sent */
-	 if (username != undefined && game-mode != undefined && score != undefined) {
-	 	username  = username.replace(/[^\w\s]/gi, '');
-	 	game-mode = game-mode.replace(/[^\w\s]/gi, '');
-	 	score     = Number(score); /* TODO: MAKE SURE THEY AREN'T FILTHY CHEATERS */
-
-	 	/* Build document to store in database */
-	 	var d = new Date();
-	 	var document = {
-	 		"username": username,
-	 		"game-mode": game-mode,
-	 		"score": score,
-	 		"time": d.toUTCString(),
-	 	};
-
-	 	db.collection('user-data', function(err, coll) {
-	 		if (!err) {
-	 			var id = coll.insert(document, function(err, saved) {
-	 				if (!err) {
-	 					resp.send(200);
-	 				} else {
-	 					resp.send(500);
-	 				}
-	 			});
-	 		} else {
-	 			resp.send(500);
-	 		}
-	 	});
-	 } else {
-	 	resp.send(200); /* OK; just didn't enter any data */
-	 }
-
 });
 
 app.get('/high-scores', cors(), function(req, resp) {
@@ -112,6 +75,7 @@ app.get('/high-scores', cors(), function(req, resp) {
 	 * Validation on this route will be on form parameters: Sanitization and
 	 * comparison against a fixed set of valid inputs. This of course prevents
 	 * script-based attacks and only deals with data we want to be dealt with.
+	 *
 	 */
 });
 
