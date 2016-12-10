@@ -63,20 +63,24 @@ function renderMap() {
 // example on how to use locations.get_two_places!
 function EXAMPLE(){
 	var promise_object = locations.get_two_places( client, 10000, 0 )
-	.then( function(some_places){
-		console.log('these are some places!');
-		console.log(JSON.stringify(some_places,null,4)); 
-	}, function(some_error){
-		console.log('this is where some_error would go!');
-		console.log(some_error);
-	});
+	.then( 
+		function(some_places){
+			console.log('these are some places!');
+			console.log(JSON.stringify(some_places,null,4)); 
+		}, 
+		function(some_error){
+			console.log('this is where some_error would go!');
+			console.log(some_error);
+		}
+	);
 
-	/* promise_object.then(
+	/* promise_object.then
 	 * 		~function to handle success~,
 	 * 	 	~function to handle error  ~
 	 * 	);
 	 */
 
+	// 
 	console.log('this is a promise object');
 	console.log( promise_object );
 	// printed before other things ^^
@@ -147,7 +151,7 @@ locations.sort_response = function( results ){
 	  			latlng2 = results[index].geometry.location;
 	  			dist    = google.maps.geometry.spherical.computeDistanceBetween( latlng1, latlng2 );
 	  			// uncomment to see whats being compared and how far they are from eachother
-				/* 
+				/*
 	  			console.log('\t '+ results[randy].name +
 	  						'\t' + results[index].name +
 	  						'\t' + dist) 
@@ -158,8 +162,9 @@ locations.sort_response = function( results ){
 	  					place_2: results[index],
 	  					dist: dist
 	  				};
-	  				/*
+	  				
 	  				// uncomment too see the names of resulting places 
+	  				/*
 	  				console.log(this.locations.my_places.place_1.name); 
 	  				console.log(this.locations.my_places.place_2.name);
 	  				*/
