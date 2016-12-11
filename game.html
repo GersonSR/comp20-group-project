@@ -5,12 +5,12 @@
 	<meta name="viewport" content="initial-scale=1.0 user-scalable=no"/>
 	<title>Find the Way!</title>
 	<link rel="stylesheet" href="style.css" type="text/css"/>
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&libraries=places,geometry,drawing,geocoding,directions"></script>
-       	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="drawtest.js"></script>
-		<script type="text/javascript" src="styling.js"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&libraries=places,geometry,geocoding,drawing"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="map.js"></script>
+	<script type="text/javascript" src="styling.js"></script>
 </head>
 <body onload="init()">
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -29,8 +29,8 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-      	<li><a href="game.html">Testing</a></li>
-        <li class="active"><a href="drawtest.html">Testing<span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="drawtest.html">Game <span class="sr-only">(current)</span></a></li>
+        <li><a href="drawtest.html">Testing</a></li>
         <li><a href="stats.html">Leaderboard</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
@@ -52,12 +52,9 @@
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
 			<ul class="nav navbar-nav">			
-				<li><label button type="button" class="btn btn-link" onclick="resetRouteDrawing()" style="margin-bottom:4px;white-space: normal;">Reset Route</label></li>
-				<li><label button type="button" class="btn btn-link" onclick="smoothRoute(23)" style="margin-bottom:4px;white-space: normal;">Smooth Route for Directions</label></li>
-				<li><label button type="button" class="btn btn-link" onclick="smoothRoute(12)" style="margin-bottom:4px;white-space: normal;">Smooth Route for Vertex Snapping</label></li>
-				<li><label button type="button" class="btn btn-link" onclick="snapRouteToRoads()" style="margin-bottom:4px;white-space: normal;">Snap Vertices to Roads</label></li>
-				<li><label button type="button" class="btn btn-link" onclick="getDirectionsAlongRoute()" style="margin-bottom:4px;white-space: normal;">Get Directions Along Route</label></li>
-            	<li><label button type="button" class="btn btn-link" onclick="compareRouteToOptimal()" style="margin-bottom:4px;white-space: normal;">Compare to Optimal Route</label></p>
+				<li><label button type="button" class="btn btn-link" onclick="" style="margin-bottom:4px;white-space: normal;">Button 1</label></li>
+				<li><label button type="button" class="btn btn-link" onclick="" style="margin-bottom:4px;white-space: normal;">Button 2</label></li>
+				<li><label button type="button" class="btn btn-link" onclick="" style="margin-bottom:4px;white-space: normal;">Button 3</label></li>
 			</ul>
 		</div>
 	</div>
