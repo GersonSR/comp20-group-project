@@ -13,7 +13,7 @@ function init() {
  * Set up the map; it is invisble at the end of this function
  */
 function setUpMap() {
-
+	var text_color = '#757D70';
 	var mapStyle = [
 		{elementType: 'geometry', stylers: [{ color: '#FBEFDF' }]},
 		{elementType: 'labels.text.stroke', stylers: [{ visibility: 'off' }]},
