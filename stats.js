@@ -37,7 +37,7 @@ function build_table(difficulty, score_data) {
 		table += "</tr>"
 	} 
 	table += "</table>"
-	leaderboard.innerHTML = table;
+	leaderboard.innerHTML = title + table;
 }
 
 function process_data(difficulty) {
