@@ -310,13 +310,20 @@ get_two_places = function( center, radius, maxDist, minDist, callback, keywords 
       var index   = (randy + 1) % results.length; 
       var latlng1 = results[randy].geometry.location;
       var latlng2;
+      var indices = [];
       var dist;
+      var indices_index;
       while(results.length > 1){
-        if (index == randy) {
-          console.log
+        if ( indices.length == 0 ) {
           results.splice(randy, 1);
           randy   = getRandomInt(0, results.length);
-          index   = (randy + 1) % results.length;
+          for ( var k = 0; k < results.length; k++ ){
+            indices[ k ] = k;
+          }
+          indices.splice( randy, 1 );
+          indices_index = getRandomInt( 0, indices.length );
+          index   = indices[ indices_index ];
+          indices.splice( indices_index, 1);
           latlng1 = results[randy].geometry.location;
         } else {
           latlng2 = results[index].geometry.location;
@@ -329,7 +336,9 @@ get_two_places = function( center, radius, maxDist, minDist, callback, keywords 
             });
             return;
           }
-          index = (index + 1) % results.length;
+          indices_index =  getRandomInt( 0, indices.length );
+          index = indices[ indices_index ];
+          indices.splice(  indices_index, 1);
         }
       }
       callback({ error:'no two places satisfy input' });
