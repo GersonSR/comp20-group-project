@@ -296,30 +296,31 @@ function playGame(origin, destination) {
 //   }
 //
 //  all units of distance are in meters
-get_two_places = function(center, radius, maxDist, minDist, callback, keywords) {
+get_two_places = function( center, radius, maxDist, minDist, callback, keywords ) {
   var request = {
     radius: radius,
     location: center
   };
-  if (keywords) {
+  if(keywords){
     request.keyword = keywords;
   }
   placesService.nearbySearch(request, function(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-      var randy = getRandomInt(0, results.length);
-      var index = (randy + 1) % results.length; 
+      var randy   = getRandomInt(0, results.length);
+      var index   = (randy + 1) % results.length; 
       var latlng1 = results[randy].geometry.location;
       var latlng2;
       var dist;
-      while(results.length > 1) {
+      while(results.length > 1){
         if (index == randy) {
+          console.log
           results.splice(randy, 1);
-          randy %= results.length;
-          index = (randy + 1) % results.length;
+          randy   = getRandomInt(0, results.length);
+          index   = (randy + 1) % results.length;
           latlng1 = results[randy].geometry.location;
         } else {
           latlng2 = results[index].geometry.location;
-          dist = google.maps.geometry.spherical.computeDistanceBetween(latlng1, latlng2);
+          dist    = google.maps.geometry.spherical.computeDistanceBetween( latlng1, latlng2 );
           if (dist >= minDist && dist <= maxDist) {
             callback({
               place_1: results[randy], 
