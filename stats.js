@@ -40,6 +40,7 @@ function build_table(difficulty, score_data) {
 	leaderboard.innerHTML = title + table;
 }
 
+/* Perform an XHR to the high-scores route to get all scores for a given difficulty */
 function process_data(difficulty) {
 	var xhr = new XMLHttpRequest();
 	xhr.open("get", "http://localhost:3000/high-scores?game_mode=" + difficulty, true);
