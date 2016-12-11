@@ -21,3 +21,6 @@
 * More game like interface and smoother graphics
 * Connecting all of the modules we have built
 
+##Comments by Ming
+* Visualizations from status report 2 --done?
+* "There was no way to make user-drawn paths cleanly snap to roads without mangling them or giving away the optimal route." => Correct.  And you know the problem is the Traveling Salesman Problem (TSP), right? #goodluckwiththat
