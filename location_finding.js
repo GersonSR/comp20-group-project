@@ -37,7 +37,7 @@ get_two_places = function( center, radius, maxDist, minDist, callback, keywords 
 			  		if ( index == randy ) {
 			  			console.log
 			  			results.splice( randy, 1 );
-			  			randy  %= results.length;
+			  			randy   = getRandomInt( 0, results.length );
 			  			index   = (randy + 1) % results.length;
 			  			latlng1 = results[randy].geometry.location;
 			  		} else {
