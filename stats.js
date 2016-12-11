@@ -10,8 +10,8 @@
 /* Give all the radio buttons event listeners for being clicked */
 /* Just leave in global scope */
 var modes = document.getElementsByName("difficulty");
-for (var i in modes) {
-	i.addEventListener('click', get_data);
+for (var i = 0; i < modes.length; i++) {
+	modes[i].addEventListener('click', get_data);
 }
 
 function get_data() {
@@ -23,24 +23,36 @@ function get_data() {
 	}
 }
 
-/* Expects array of objects */
-function build_table(score_data) {
+/* Expects array of objects holding score data */
+function build_table(difficulty, score_data) {
 	var leaderboard = document.getElementById("leaderboard");
-	
+	var title = "<h1>Scores (" + difficulty.replace(/\b\w/g, l => l.toUpperCase()) + ")</h1>"
+	var table = "<table>"
+	/* Assume: Array is sorted by score */
+	for (var i = 0; i < score_data.length; i++) {
+		table += "<tr>"
+		table += "<td>" + (i + 1) + "</td>" + 
+		         "<td>" + score_data[i].username + "</td>" +
+		         "<td>" + score_data[i].score + "</td>"
+		table += "</tr>"
+	} 
+	table += "</table>"
+	leaderboard.innerHTML = table;
 }
 
 function process_data(difficulty) {
 	var xhr = new XMLHttpRequest();
-	xhr.open("post", "http://localhost:3000/high-scores", true);
-	request.onreadystatechange = function() {
+	xhr.open("get", "http://localhost:3000/high-scores?game_mode=" + difficulty, true);
+	xhr.onreadystatechange = function() {
 		if (xhr.readyState === 4) {
 			if (xhr.status === 200) {
-				var raw_data = request.responseText;
+				var raw_data = xhr.responseText;
 				var data = JSON.parse(raw_data);
-				build_table(data);
+				build_table(difficulty, data);
 			} else {
 				process_data(difficulty);
 			}
 		}
 	};
+	xhr.send();
 }

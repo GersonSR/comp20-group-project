@@ -35,7 +35,7 @@ app.post('/submit', cors(), function(req, resp) {
 	 *
 	 * {
 	 * 		username: ,
-	 *		game-mode: ,
+	 *		game_mode: ,
 	 *  	score: ,
 	 *		time: ,
 	 * }
@@ -59,40 +59,40 @@ app.post('/submit', cors(), function(req, resp) {
 
 	 /* Get out all request parameters */
 	 var username  = req.body.username;
-	 var game-mode = req.body.game-mode;
+	 var game_mode = req.body.game_mode;
 	 var score     = req.body.score;
 
-	 if (username != undefined && game-mode != undefined && score != undefined &&
-	 	                         (game-mode === "easy" || game-mode === "hard" ||
-	 	                       	  game-mode === "local")) {
+	 if (username != undefined && game_mode != undefined && score != undefined &&
+	 	                         (game_mode === "easy" || game_mode === "hard" ||
+	 	                       	  game_mode === "local")) {
 	 	username  = username.replace(/[^\w\s]/gi, '');
-	 	game-mode = game-mode.replace(/[^\w\s]/gi, '');
+	 	game_mode = game_mode.replace(/[^\w\s]/gi, '');
 	 	score     = Number(score); /* TODO: MAKE SURE THEY AREN'T FILTHY CHEATERS BY CALCULATING SCORE ON SERVER-SIDE */
 
 	 	/* Build document to store in database */
 	 	var d = new Date();
 	 	var document = {
 	 		"username": username,
-	 		"game-mode": game-mode,
+	 		"game_mode": game_mode,
 	 		"score": score,
 	 		"time": d.toUTCString(), /* Makes the date and time look reasonable */
 	 	};
 
-	 	db.collection('user-data', function(err, coll) {
+	 	db.collection('userdata', function(err, coll) {
 	 		if (!err) {
 	 			var id = coll.insert(document, function(err, saved) {
 	 				if (!err) {
-	 					resp.send(200);
+	 					resp.sendStatus(200);
 	 				} else {
-	 					resp.send(500);
+	 					resp.sendStatus(500);
 	 				}
 	 			});
 	 		} else {
-	 			resp.send(500);
+	 			resp.sendStatus(500);
 	 		}
 	 	});
 	 } else {
-	 	resp.send(200); /* OK; just didn't enter any data */
+	 	resp.sendStatus(200); /* OK; just didn't enter any data */
 	 }
 
 });
@@ -114,6 +114,21 @@ app.get('/high-scores', cors(), function(req, resp) {
 	 * comparison against a fixed set of valid inputs. This of course prevents
 	 * script-based attacks and only deals with data we want to be dealt with.
 	 */
+	 var game_mode = req.query.game_mode;
+	 
+	 if (game_mode === undefined) {
+	 	resp.send("[]");
+	 } else {
+	 	db.collection('userdata', function(er, coll) {
+	 		coll.find({
+	 			"game_mode": game_mode
+	 		}).sort({
+	 			score: -1
+	 		}).toArray(function(err, docs) {
+	 			resp.send(JSON.stringify(docs));
+	 		})
+	 	});
+	 }
 });
 
 /*
@@ -124,3 +139,4 @@ app.get('/high-scores', cors(), function(req, resp) {
  * with stuff for the user to download and run locally.
  */
 
+app.listen(process.env.PORT || 3000);
