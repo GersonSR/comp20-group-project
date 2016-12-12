@@ -7,11 +7,29 @@ html, body {
 /* map element */
 #map {
 	position: absolute;
-	left: 200px;
+	left: 0;
 	right: 0;
 	top: 50px;
-	bottom: 54px;
+	bottom: 0;
 	background-color: lightblue;
+}
+/* restart button for game */
+#restart-button {
+    color: white;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: none;
+    border-radius: 0px;
+    box-shadow: 0 0 2px black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 17px;
+    padding-right: 17px;
+    background-color: #5cb85c;
+}
+#restart-button:hover {
+    text-shadow: 0 0 1px white;
 }
 
 .form-group {

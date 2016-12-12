@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&libraries=places,geometry"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&amp;libraries=places,geometry"></script>
 	<script type="text/javascript" src="game.js"></script>
 </head>
 <body>
@@ -22,42 +22,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <div class="navbar-brand" href="index.html">Find the Way!</div>
+      <a class="navbar-brand" href="index.html">Find the Way!</a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="game.html">Game <span class="sr-only">(current)</span></a></li>
+        <li class="active"><a href="game.html">Game<span class="sr-only">(current)</span></a></li>
         <li><a href="stats.html">Leaderboard</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
 
-<nav class="navbar sidebar" role="navigation" style="margin-top:50px;">
-    <div class="container-fluid">
-		<!-- Brand and toggle get grouped for better mobile display -->
-		<div class="navbar-header">
-			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
-				<span class="sr-only">Toggle navigation</span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Game Menu</a>
-		</div>
-		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
-			<ul class="nav navbar-nav">			
-				<li><label button type="button" class="btn btn-link" onclick="" style="margin-bottom:4px;white-space: normal;">Button 1</label></li>
-				<li><label button type="button" class="btn btn-link" onclick="" style="margin-bottom:4px;white-space: normal;">Button 2</label></li>
-				<li><label button type="button" class="btn btn-link" onclick="" style="margin-bottom:4px;white-space: normal;">Button 3</label></li>
-			</ul>
-		</div>
-	</div>
-</nav>
-	<div id="map"></div>
+<div id="map"></div>
+
+<button id="restart-button" onclick="$('#setup-modal').modal('toggle');">Restart</button>
 
 
 <!-- new score modal -->
@@ -94,7 +74,7 @@
 
 </body>
 
-<!-- new score modal -->
+<!-- new setip modal -->
 <div class="modal fade" id="setup-modal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
