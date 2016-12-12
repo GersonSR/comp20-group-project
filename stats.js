@@ -33,6 +33,9 @@ function build_table(difficulty, score_data) {
 	var table = "<table>"
 	/* Assume: Array is sorted by score */
 	for (var i = 0; i < score_data.length; i++) {
+		if (score_data[i].username === "") {
+			score_data[i].username = "Anonymous";
+		}
 		table += "<tr>"
 		table += "<td>" + (i + 1) + "</td>" + 
 		         "<td>" + score_data[i].username + "</td>" +
