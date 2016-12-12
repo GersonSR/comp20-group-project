@@ -30,21 +30,25 @@ function get_data() {
 function build_table(difficulty, score_data) {
 	var leaderboard = document.getElementById("leaderboard");
 	var title = "<h1>Scores (" + difficulty.replace(/\b\w/g, l => l.toUpperCase()) + ")</h1>"
-	var table = "<table>"
+	var table = "<table class=\"table table-bordered table-hover table-striped\">"
+	table += "<thead><tr class=\"success\"><th>Rank</th><th>username</th><th>Score</th></tr></thead>"
+	table += "<tbody>"
 	/* Assume: Array is sorted by score */
 	for (var i = 0; i < score_data.length; i++) {
 		if (score_data[i].username === "") {
 			score_data[i].username = "Anonymous";
 		}
+
 		table += "<tr>"
-		table += "<td>" + (i + 1) + "</td>" + 
+		table += "<th scope=\"row\">" + (i + 1) + "</th>" + 
 		         "<td>" + score_data[i].username + "</td>" +
 		         "<td>" + score_data[i].score + "</td>"
 		table += "</tr>"
 	} 
-	table += "</table>"
+	table += "</tbody></table>"
 	leaderboard.innerHTML = title + table;
 }
+
 
 /* Perform an XHR to the high-scores route to get all scores for a given difficulty */
 function process_data(difficulty) {
