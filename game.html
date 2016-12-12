@@ -11,7 +11,7 @@
     <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&libraries=places,geometry,geocoding,drawing"></script>
 	<script type="text/javascript" src="game.js"></script>
 </head>
-<body onload="init()">
+<body>
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -58,11 +58,10 @@
 	</div>
 </nav>
 	<div id="map"></div>
-	<footer id="footer"></footer>
 
 
 <!-- new score modal -->
-<div class="modal fade" id="scoreModal" role="dialog">
+<div class="modal fade" id="score-modal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -72,7 +71,7 @@
 	          <span class="glyphicon glyphicon-thumbs-up"></span>
 	          <span class="glyphicon glyphicon-thumbs-up"></span>
 	          <span class="glyphicon glyphicon-thumbs-up"></span>
-	          hey great score buddy!
+	          Hey great score buddy!
 	          <span class="glyphicon glyphicon-thumbs-up"></span>
 	          <span class="glyphicon glyphicon-thumbs-up"></span>
 	          <span class="glyphicon glyphicon-thumbs-up"></span>
@@ -83,9 +82,36 @@
           <form role="form" id="score_submit_form">
             <div class="form-group">
               <label for="username_input">Username</label>
-              <input type="text" class="form-control" id="username_input" placeholder="username!" name="score_username">
+              <input type="text" class="form-control" id="username_input" name="score_username">
             </div>
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-send"></span>    Submit Score</button>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-send"></span>Submit Score and Play Again</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+<!-- new score modal -->
+<div class="modal fade" id="setup-modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:10px 25px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4>Select Difficulty</h4>
+        </div>
+        <div class="modal-body" style="padding:10px 12px;">
+        <p id="modal_new_score_display"></p>
+          <form role="form" id="difficulty-select-form">
+            <div class="form-group">
+              <input type="radio" value="easy" name="difficulty"/>Easy<br/>
+              <input type="radio" value="hard" name="difficulty"/>Hard<br/>
+              <input type="radio" value="local" name="difficulty" checked/>Local<br/>
+            </div>
+              <button type="submit" class="btn btn-success btn-block" action="">Start Game</button>
           </form>
         </div>
       </div>

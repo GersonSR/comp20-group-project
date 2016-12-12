@@ -1,47 +1,104 @@
 var serverURL = "https://find-the-way.herokuapp.com";
-var currentGameStats = {};
-/*  currentGameStats {
- *    score:
- *    area:
- *    game_mode:
- * }                    
- */
+
+// Current Game Stats
+var score;
+var gameMode;
+var difficulty = 'easy'; // default
+
+// Game settings by difficulty
+var gameSettings = {
+  easy: { // Chicago
+    center: new google.maps.LatLng(41.836944, -87.684722),
+    radius: 20000,
+    maxDist: 1500,
+    minDist: 1000,
+  },
+  hard: { // Boston
+    center: new google.maps.LatLng(42.358056, -71.063611),
+    radius: 10000,
+    maxDist: 1500,
+    minDist: 1000,
+  },
+  local: { // Tufts University, Sophia Gordon Hall :p
+    center: new google.maps.LatLng(42.404996, -71.118333),
+    radius: 1000,
+    maxDist: 1500,
+    minDist: 1000,
+  }
+}
+
+// variables for map functionality
 var directionsService;
 var placesService;
+
 var map;
+var optimalRoute;
+var drawnRoute;
+var originMarker;
+var destinationMarker;
 
-$(document).ready( ()=>{
-  $("#scoreModal").submit(function(event) {
-    event.preventDefault();
-    var $form    = $("#score_submit_form");
-    var username = $form.find('input[name="score_username"]').val();
-    sendGameData( currentGameStats, username );
-  })
-});
-
-
-/*
- * Initialize the program state (everything here should be done as soon as the API is loaded)
- */
-function init() {
+$(document).ready(function() {
   directionsService = new google.maps.DirectionsService();
   setUpMap();
   placesService = new google.maps.places.PlacesService(map);
 
-  var center = new google.maps.LatLng(42.358056, -71.063611); // a location in Boston
+  $("#score-modal").submit(function(event) {
+    event.preventDefault();
+    var $form = $("#score_submit_form");
+    var username = $form.find('input[name="score_username"]').val();
+    sendGameData(score, difficulty, username); 
+    $("#score-modal").modal('toggle');
+    // Turn on game setup modal
+    $("#setup-modal").modal('toggle');
+  });
 
-  get_two_places(
-    center, 10000, 1500, 1000, function(args) {
-      if (args.error) {
-        alert(args.error);
-      } else {
-        playGame(args.place_1.geometry.location, args.place_2.geometry.location);
-      }
-    });
+  $("#setup-modal").submit(function(event) {
+    event.preventDefault();
+    var $form = $("#difficulty-select-form");
+    difficulty = $form.find('input[name="difficulty"]:checked').val();
+
+    // Reset the game
+    clearMap();
+
+    // Start up the game
+    get_two_places(
+      gameSettings[difficulty].center, gameSettings[difficulty].radius,
+      gameSettings[difficulty].maxDist, gameSettings[difficulty].minDist,
+      function(args) {
+        if (args.error) {
+          alert(args.error);
+        } else {
+          playGame(args.place_1.geometry.location,
+            args.place_2.geometry.location);
+        }
+      });
+    $("#setup-modal").modal('toggle');
+  });
+  $("#setup-modal").modal('toggle');
+});
+
+// Remove all relevant objects from the map
+function clearMap() {
+  if (optimalRoute) {
+    optimalRoute.setMap(null);
+    optimalRoute = undefined;
+  }
+  if (drawnRoute) {
+    drawnRoute.setMap(null);
+    drawnRoute = undefined;
+  }
+  if (originMarker) {
+    originMarker.setMap(null);
+    originMarker = undefined;
+  }
+  if (destinationMarker) {
+    destinationMarker.setMap(null);
+    destinationMarker = undefined;
+  }
 }
 
 /*
- * Set up the map; it is invisble at the end of this function
+ * Set up the map, but don't center it
  */
 function setUpMap() {
   var text_color = '#757D70';
@@ -173,7 +230,7 @@ function playGame(origin, destination) {
   // Recenter the map halfway between the two points
   map.setCenter(google.maps.geometry.spherical.interpolate(origin, destination, 0.5));
 
-  var originMarker = new google.maps.Marker({
+  originMarker = new google.maps.Marker({
     draggable: true, // let the user drag this marker
     position: origin,
     label: '↝', // placeholder
@@ -181,7 +238,7 @@ function playGame(origin, destination) {
     map: map
   });
 
-  var destinationMarker = new google.maps.Marker({
+  destinationMarker = new google.maps.Marker({
     draggable: false,
     position: destination,
     label: '↯', // placeholder
@@ -189,7 +246,7 @@ function playGame(origin, destination) {
     map: map
   });
 
-  var drawnRoute = new google.maps.Polyline({
+  drawnRoute = new google.maps.Polyline({
     geodesic: true,
     map: map,
     strokeColor: 'red',
@@ -248,14 +305,14 @@ function playGame(origin, destination) {
     originMarker.setPosition(origin);
     drawnRoute.getPath().push(destination);
     currentlyDrawing = false;
-    compareRouteToOptimal(endGamePrompt);
+    compareRouteToOptimal();
   }
 
   // Calculate the similarity between the optimal route (Google Directions)
   // and the user-drawn route
   // 
-  // (callback) - optional 
-  function compareRouteToOptimal( callback ) {
+  // Then, displays to the user
+  function compareRouteToOptimal() {
     directionsService.route({
       origin: origin,
       destination: destination,
@@ -266,7 +323,7 @@ function playGame(origin, destination) {
         optimalRoutePath = google.maps.geometry.encoding.decodePath(response.routes[0].overview_polyline);
 
         // Chart the optimal route
-        var optimalRoute = new google.maps.Polyline({
+        optimalRoute = new google.maps.Polyline({
           geodesic: true,
           map: map,
           strokeColor: 'blue',
@@ -291,56 +348,45 @@ function playGame(origin, destination) {
         var area = google.maps.geometry.spherical.computeArea(routeLoop);
         // Experimental score calculation: 10000 times the ratio of the length of the optimal route to the enclosed area
         var routeLength = google.maps.geometry.spherical.computeLength(optimalRoutePath);
-        var score = calculateScore(area, routeLength);
-        if ( callback ) {
-          callback( score, Math.floor(area) );
-        }
+
+        // set global score value
+        score = calculateScore(area, routeLength);
+        // Display to user
+        displayScoreOnModal();
       }
     });
   }
 }
 
-// immediately after game is done this function runs
-function endGamePrompt( new_score, new_area ) {
-  currentGameStats.score      = new_score ;
-  currentGameStats.area       = new_area  ;
-  currentGameStats.game_mode  = "hard";    // TEMPORARY!!!!!!!!!!
-  displayScoreOnModal( new_score, new_area );
+// score is a global variable
+function displayScoreOnModal() {
+  scoreModal = document.getElementById('modal_new_score_display');
+  $(scoreModal).empty();
+  $('<p/>', {
+    class: 'modalContentInfo',
+    text: 'Score: ' + score
+  }).appendTo(scoreModal);
+  $('<p/>', {
+    class: 'modalContentInfo',
+    text: 'Difficulty: ' + difficulty
+  }).appendTo(scoreModal);
+  $("#score-modal").modal('toggle');
 }
 
-// 
-function displayScoreOnModal( score, area ){
-  var displayInfo = "";
-  displayInfo += '<div  class = "modalContentInfoType" style = "display: inline-block;" >  Score: </div>';
-  displayInfo += '<div  class = "modalContentInfo"     style = "display: inline-block;" >'+score+'</div>';
-  displayInfo += '<p></p>';
-  displayInfo += '<div  class = "modalContentInfoType" style = "display: inline-block;" >  Area: </div>';
-  displayInfo += '<div  class = "modalContentInfo"     style = "display: inline-block;" >'+area+'</div>';
-  document.getElementById('modal_new_score_display').innerHTML = displayInfo;
-  $("#scoreModal").modal('toggle');
-}
-
-function sendGameData( gameData, username ){
-  console.log(gameData); // for debugging
-  console.log(username); // for debugging
-
-  var package = {
-    username: username,
-    game_mode:gameData.game_mode,
-    score:    gameData.score,
-    time:     new Date()
+function sendGameData( scoreToSend, difficultyToSend, usernameToSend ){
+  var data = {
+    username:   usernameToSend,
+    difficulty: difficultyToSend,
+    score:      scoreToSend,
+    time:       new Date()
   };
-
-  // this step may be unneeded
-  var packageJSON = JSON.stringify(package); 
 
   $.ajax({
     type: "POST",
     url: serverURL + "/submit.json",
-           dataType: "json",
-           data: packageJSON 
+    dataType: "json",
+    data: data 
   });
-  $("#scoreModal").modal('toggle');
 }
 
 // locations.get_two_places( center, radius, maxDist, minDist, keywords )
