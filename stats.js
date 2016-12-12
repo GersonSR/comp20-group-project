@@ -9,10 +9,12 @@
 
 /* Give all the radio buttons event listeners for being clicked */
 /* Just leave in global scope */
-var modes = document.getElementsByName("difficulty");
-for (var i = 0; i < modes.length; i++) {
-	modes[i].addEventListener('click', get_data);
-}
+$(document).ready(function() {
+	var modes = document.getElementsByName("difficulty");
+	for (var i = 0; i < modes.length; i++) {
+		modes[i].addEventListener('click', get_data);
+	}
+});
 
 function get_data() {
 	for (var i = 0; i < modes.length; i++) {
