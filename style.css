@@ -140,3 +140,11 @@ nav:hover .forAnimate{
 section{
     padding-left: 15px;
 }
+
+/* CSS styling for the modal header and some of its components */
+.modal-header, h4, .close {
+    background-color: #5cb85c;
+    color:white !important;
+    text-align: center;
+    font-size: 30px;
+}
