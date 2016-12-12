@@ -37,10 +37,6 @@ html, body {
 }
 
 
-/* Side Bar */
-body,html{
-    height: 93%;
-}
 
 /*Remove rounded coners*/
 nav.sidebar.navbar {

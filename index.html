@@ -3,37 +3,59 @@
 <head>
   <meta charset="utf-8"/>
   <title>Find the Way!</title>
-  <link rel="stylesheet" href="index.css" type="text/css"/>
+  <!--<link rel="stylesheet" href="index.css" type="text/css"/>-->
+  <link rel="stylesheet" href="landingpage.css" type="text/css"/>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
-<div class="site-wrapper">
-  <div class="site-wrapper-inner">
-    <div class="cover-container">
-      <div class="masthead clearfix">
-        <div class="inner">
-          <h3 class="masthead-brand">Find the Way!</h3>
-
-          <ul class="nav masthead-nav">
-            <li>
-              <a href="game.html">Game</a>
-            </li>
-            <li>
-              <a href="stats.html">Leaderboard</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-      <div class="inner cover">
-        <h1 class="cover-heading">Find the Way!</h1>
-
-        <p class="lead">Stuff about the game!
-       </p>
-      </div>
+<!-- Nav bar, as on other pages -->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Find the Way!</a>
     </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="game.html">Game</a></li>
+        <li><a href="stats.html">Leaderboard</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div id="masthead" class="jumbotron text-center">
+  <h1>Find The Way</h1>
+  <p>Snappy tag line here</p>
 </div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-4">
+      <h3 class="center-heading">Feature 1</h3>
+      <img src="mapbackground.jpg" class="img-thumbnail" title="Screenshot"></img>
+      <p>Short blurb here</p>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="center-heading">Feature 2</h3>
+      <img src="mapbackground.jpg" class="img-thumbnail" title="Screenshot"></img>
+      <p>Short blurb here</p>
+    </div>
+    <div class="col-sm-4">
+      <h3 class="center-heading">Feature 3</h3>
+      <img src="mapbackground.jpg" class="img-thumbnail" title="Screenshot"></img>
+      <p>Short blurb here</p>
+    </div>
+  </div>
 </div>
 </body>
