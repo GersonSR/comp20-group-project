@@ -380,12 +380,26 @@ function sendGameData( scoreToSend, difficultyToSend, usernameToSend ){
     score:      scoreToSend,
   };
 
-  $.ajax({
-    type: "POST",
-    url: serverURL + "/submit",
-    dataType: "json",
-    data: data 
-  });
+  if (difficultyToSend === "local") {
+  	if (localStorage.getItem("scores") == null) {
+  		localStorage.setItem("scores", JSON.stringify([]));
+  	}
+
+  	var scores = JSON.parse(localStorage.getItem("scores"));
+  	scores.push(data);
+  	scores.sort(function(a, b) {
+  		return Number(b.score) - Number(a.score);
+  	});
+  	localStorage.setItem("scores", JSON.stringifyscores);
+
+  } else {
+  	$.ajax({
+    	type: "POST",
+    	url: serverURL + "/submit",
+    	dataType: "json",
+    	data: data 
+  	});
+  }
 }
 
 // locations.get_two_places( center, radius, maxDist, minDist, keywords )
