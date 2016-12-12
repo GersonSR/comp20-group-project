@@ -1,6 +1,24 @@
+var serverURL = "https://find-the-way.herokuapp.com/";
+var currentGameStats = {};
+/*  currentGameStats {
+ *    score:
+ *    area:
+ *    game_mode:
+ * }                    
+ */
 var directionsService;
 var placesService;
 var map;
+
+$(document).ready( ()=>{
+  $("#scoreModal").submit(function(event) {
+    event.preventDefault();
+    var $form    = $("#score_submit_form");
+    var username = $form.find('input[name="score_username"]').val();
+    sendGameData( currentGameStats, username );
+  })
+});
+
 
 /*
  * Initialize the program state (everything here should be done as soon as the API is loaded)
@@ -230,12 +248,14 @@ function playGame(origin, destination) {
     originMarker.setPosition(origin);
     drawnRoute.getPath().push(destination);
     currentlyDrawing = false;
-    compareRouteToOptimal();
+    compareRouteToOptimal(endGamePrompt);
   }
-  
+
   // Calculate the similarity between the optimal route (Google Directions)
   // and the user-drawn route
-  function compareRouteToOptimal() {
+  // 
+  // (callback) - optional 
+  function compareRouteToOptimal( callback ) {
     directionsService.route({
       origin: origin,
       destination: destination,
@@ -272,10 +292,55 @@ function playGame(origin, destination) {
         // Experimental score calculation: 10000 times the ratio of the length of the optimal route to the enclosed area
         var routeLength = google.maps.geometry.spherical.computeLength(optimalRoutePath);
         var score = calculateScore(area, routeLength);
-        alert('Area: '+ Math.floor(area) + ' square meters\nScore (experimental): ' + score + ' points');
+        if ( callback ) {
+          callback( score, Math.floor(area) );
+        }
       }
     });
   }
+}
+
+// immediately after game is done this function runs
+function endGamePrompt( new_score, new_area ) {
+  currentGameStats.score      = new_score ;
+  currentGameStats.area       = new_area  ;
+  currentGameStats.game_mode  = "hard";    // TEMPORARY!!!!!!!!!!
+  displayScoreOnModal( new_score, new_area );
+}
+
+// 
+function displayScoreOnModal( score, area ){
+  var displayInfo = "";
+  displayInfo += '<div  class = "modalContentInfoType" style = "display: inline-block;" >  Score: </div>';
+  displayInfo += '<div  class = "modalContentInfo"     style = "display: inline-block;" >'+score+'</div>';
+  displayInfo += '<p></p>';
+  displayInfo += '<div  class = "modalContentInfoType" style = "display: inline-block;" >  Area: </div>';
+  displayInfo += '<div  class = "modalContentInfo"     style = "display: inline-block;" >'+area+'</div>';
+  document.getElementById('modal_new_score_display').innerHTML = displayInfo;
+  $("#scoreModal").modal('toggle');
+}
+
+function sendGameData( gameData, username ){
+  console.log(gameData); // for debugging
+  console.log(username); // for debugging
+
+  var package = {
+    username: username,
+    game_mode:gameData.game_mode,
+    score:    gameData.score,
+    time:     new Date()
+  };
+
+  // this step may be unneeded
+  var packageJSON = JSON.stringify(package); 
+
+  $.ajax({
+    type: "POST",
+    url: serverURL + "/submit.json",
+           dataType: "json",
+           data: packageJSON 
+  });
+  $("#scoreModal").modal('toggle');
 }
 
 // locations.get_two_places( center, radius, maxDist, minDist, keywords )
