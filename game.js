@@ -390,7 +390,7 @@ function sendGameData( scoreToSend, difficultyToSend, usernameToSend ){
   	scores.sort(function(a, b) {
   		return Number(b.score) - Number(a.score);
   	});
-  	localStorage.setItem("scores", JSON.stringifyscores);
+  	localStorage.setItem("scores", JSON.stringify(scores));
 
   } else {
   	$.ajax({
