@@ -34,11 +34,21 @@
 </nav>
 
 <div id="options">
+  <h3>Choose difficulty to view scores:</h3>
 	<form>
-		<h3>Choose difficulty to view scores:</h3>
-		<input type="radio" name="difficulty" value="easy">Easy <br/>
-		<input type="radio" name="difficulty" value="hard">Hard <br/>
-		<input type="radio" name="difficulty" value="local">Local <br/>
+    <h3>Choose difficulty to view scores:</h3>
+    <label class="radio-inline">
+		  <input type="radio" id="Easy" name="difficulty" value="Easy">
+      <label for="Easy">Easy</span>
+    </label>
+    <label class="radio-inline">
+      <input type="radio" id="Hard"name="difficulty" value="Hard">
+		  <label for="Hard">Hard</span>
+    </label>
+    <label class="radio-inline">
+		  <input type="radio" id="Local" name="difficulty" value="local">
+       <label for="Local">Local</span>
+    </label>
 	</form>
 </div>
 <div id="leaderboard"></div>
