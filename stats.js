@@ -6,11 +6,12 @@
  * and generates a chart based on the data (to show a score distribution of sorts)
  */
 
+var modes;
 
 /* Give all the radio buttons event listeners for being clicked */
 /* Just leave in global scope */
 $(document).ready(function() {
-	var modes = document.getElementsByName("difficulty");
+	modes = document.getElementsByName("difficulty");
 	for (var i = 0; i < modes.length; i++) {
 		modes[i].addEventListener('click', get_data);
 	}
