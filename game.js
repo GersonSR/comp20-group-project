@@ -378,7 +378,6 @@ function sendGameData( scoreToSend, difficultyToSend, usernameToSend ){
     username:   usernameToSend,
     difficulty: difficultyToSend,
     score:      scoreToSend,
-    time:       new Date()
   };
 
   $.ajax({
