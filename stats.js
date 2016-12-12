@@ -31,7 +31,7 @@ function build_table(difficulty, score_data) {
 	var leaderboard = document.getElementById("leaderboard");
 	var title = "<h1>Scores (" + difficulty.replace(/\b\w/g, l => l.toUpperCase()) + ")</h1>"
 	var table = "<table class=\"table table-bordered table-hover table-striped\">"
-	table += "<thead><tr class=\"success\"><th>Rank</th><th>username</th><th>Score</th></tr></thead>"
+	table += "<thead><tr class=\"success\"><th>Rank</th><th>Username</th><th>Score</th></tr></thead>"
 	table += "<tbody>"
 	/* Assume: Array is sorted by score */
 	for (var i = 0; i < score_data.length; i++) {
