@@ -383,7 +383,7 @@ function sendGameData( scoreToSend, difficultyToSend, usernameToSend ){
 
   $.ajax({
     type: "POST",
-    url: serverURL + "/submit.json",
+    url: serverURL + "/submit",
     dataType: "json",
     data: data 
   });
