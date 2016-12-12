@@ -35,6 +35,7 @@ function build_table(difficulty, score_data) {
 	table += "<tbody>"
 	/* Assume: Array is sorted by score */
 	for (var i = 0; i < score_data.length; i++) {
+		console.log("hi");
 		table += "<tr>"
 		table += "<th scope=\"row\">" + (i + 1) + "</th>" + 
 		         "<td>" + score_data[i].username + "</td>" +
