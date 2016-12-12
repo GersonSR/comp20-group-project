@@ -33,7 +33,6 @@ function build_table(difficulty, score_data) {
 	var table = "<table>"
 	/* Assume: Array is sorted by score */
 	for (var i = 0; i < score_data.length; i++) {
-		console.log("hi");
 		table += "<tr>"
 		table += "<td>" + (i + 1) + "</td>" + 
 		         "<td>" + score_data[i].username + "</td>" +
@@ -46,18 +45,26 @@ function build_table(difficulty, score_data) {
 
 /* Perform an XHR to the high-scores route to get all scores for a given difficulty */
 function process_data(difficulty) {
-	var xhr = new XMLHttpRequest();
-	xhr.open("get", "http://find-the-way.herokuapp.com/high-scores?difficulty=" + difficulty, true);
-	xhr.onreadystatechange = function() {
-		if (xhr.readyState === 4) {
-			if (xhr.status === 200) {
-				var raw_data = xhr.responseText;
-				var data = JSON.parse(raw_data);
-				build_table(difficulty, data);
-			} else {
-				process_data(difficulty);
+	if (difficulty === "local") {
+		if (localStorage.getItem("scores") == null) {
+			localStorage.setItem("scores", JSON.stringify([]));
+		} 
+		var data = JSON.parse(localStorage.getItem("scores"));
+		build_table(difficulty, data);
+	} else {
+		var xhr = new XMLHttpRequest();
+		xhr.open("get", "http://find-the-way.herokuapp.com/high-scores?difficulty=" + difficulty, true);
+		xhr.onreadystatechange = function() {
+			if (xhr.readyState === 4) {
+				if (xhr.status === 200) {
+					var raw_data = xhr.responseText;
+					var data = JSON.parse(raw_data);
+					build_table(difficulty, data);
+				} else {
+					process_data(difficulty);
+				}
 			}
-		}
-	};
-	xhr.send();
+		};
+		xhr.send();
+	}
 }
