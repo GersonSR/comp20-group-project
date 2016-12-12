@@ -1,4 +1,4 @@
-var serverURL = "https://find-the-way.herokuapp.com/";
+var serverURL = "https://find-the-way.herokuapp.com";
 var currentGameStats = {};
 /*  currentGameStats {
  *    score:
