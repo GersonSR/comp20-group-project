@@ -32,11 +32,11 @@ var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
 var icons = {
   origin: {
     name: 'Start',
-    icon: 'walkingman.png'
+    icon: 'walking-icon.png'
   },
   destination: {
     name: 'End',
-    icon: 'target.png'
+    icon: 'arrow-icon.png'
   }
 };
 
