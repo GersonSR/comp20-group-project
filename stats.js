@@ -75,8 +75,8 @@ function render_chart() {
 
 	var chart = new google.visualization.LineChart(chart_div);
 	if (data.length > 0) {
-		chart.draw(formatted_data, options);
 		$("#chart").show();
+		chart.draw(formatted_data, options);
 	}
 }
 
