@@ -71,34 +71,36 @@ $(document).ready(function() {
     		if (navigator.geolocation) {
     			navigator.geolocation.getCurrentPosition(function(pos) {
     				gameSettings[difficulty].center = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    				begin_game(difficulty);
     			}, function() {
     				handle_geo_error(true);
     			});
     		} else {
     			handle_geo_error(false);
     		}
+    	} else {
+    		begin_game(difficulty);
     	}
     }
-
-    // Reset the game
-    clearMap();
-
-    // Start up the game
-    get_two_places(
-      gameSettings[difficulty].center, gameSettings[difficulty].radius,
-      gameSettings[difficulty].maxDist, gameSettings[difficulty].minDist,
-      function(args) {
-        if (args.error) {
-          alert(args.error);
-        } else {
-          playGame(args.place_1.geometry.location,
-            args.place_2.geometry.location);
-        }
-      });
     $("#setup-modal").modal('toggle');
   });
   $("#setup-modal").modal('toggle');
 });
+
+function begin_game(difficulty) {
+	clearMap();
+	get_two_places(
+      	gameSettings[difficulty].center, gameSettings[difficulty].radius,
+      	gameSettings[difficulty].maxDist, gameSettings[difficulty].minDist,
+      	function(args) {
+        	if (args.error) {
+          	alert(args.error);
+        	} else {
+          	playGame(args.place_1.geometry.location,
+            	args.place_2.geometry.location);
+        	}
+    	});
+}
 
 // Remove all relevant objects from the map
 function clearMap() {
