@@ -81,6 +81,8 @@ $(document).ready(function() {
     	} else {
     		begin_game(difficulty);
     	}
+    } else {
+      begin_game(difficulty);
     }
     $("#setup-modal").modal('toggle');
   });
