@@ -22,6 +22,7 @@ $(document).ready(function() {
 });
 
 function get_data() {
+	$("#chart").hide();
 	data = [];
 	for (var i = 0; i < modes.length; i++) {
 		if (modes[i].checked) {
@@ -75,6 +76,7 @@ function render_chart() {
 	var chart = new google.visualization.LineChart(chart_div);
 	if (data.length > 0) {
 		chart.draw(formatted_data, options);
+		$("#chart").show();
 	}
 }
 
