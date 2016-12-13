@@ -67,7 +67,7 @@ function render_chart() {
 	formatted_data = google.visualization.arrayToDataTable(formatted_data);
 
 	var options = {
-		title: "Score Distribution",
+		title: "Scores by Rank",
 		lengend: { position: "bottom" }
 	};
 
