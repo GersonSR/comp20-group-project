@@ -19,12 +19,20 @@ var gameSettings = {
     maxDist: 1500,
     minDist: 1000,
   },
-  local: { // Tufts University, Sophia Gordon Hall :p
-    center: new google.maps.LatLng(42.404996, -71.118333),
+  local: { // Tufts University, Sophia Gordon Hall by default
+    // center: new google.maps.LatLng(42.404996, -71.118333),
+    center: undefined,
     radius: 1000,
     maxDist: 1500,
     minDist: 1000,
   }
+}
+
+// Handle geolocation errors
+function handle_geo_error(hasGeolocation)
+{
+    hasGeolocation ? alert("Error: Geolocation service failed.") :
+                     alert("Error: Browser doesn't support Geolocation.");
 }
 
 // variables for map functionality
@@ -56,6 +64,21 @@ $(document).ready(function() {
     event.preventDefault();
     var $form = $("#difficulty-select-form");
     difficulty = $form.find('input[name="difficulty"]:checked').val();
+
+    // Get GeoLocation data if they want to play locally
+    if (difficulty === "local") {
+    	if (gameSettings[difficulty].center == undefined) {
+    		if (navigator.geolocation) {
+    			navigator.geolocation.getCurrentPosition(function(pos) {
+    				gameSettings[difficulty].center = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
+    			}, function() {
+    				handle_geo_error(true);
+    			});
+    		} else {
+    			handle_geo_error(false);
+    		}
+    	}
+    }
 
     // Reset the game
     clearMap();
