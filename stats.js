@@ -22,6 +22,7 @@ $(document).ready(function() {
 });
 
 function get_data() {
+	data = [];
 	for (var i = 0; i < modes.length; i++) {
 		if (modes[i].checked) {
 			process_data(modes[i].value);
@@ -52,9 +53,7 @@ function build_table(difficulty) {
 	table += "</tbody></table>"
 	leaderboard.innerHTML = title + table;
 
-	if (data.length > 0) {
-		render_chart();
-	}
+	render_chart();
 }
 
 function render_chart() {
@@ -74,7 +73,9 @@ function render_chart() {
 	};
 
 	var chart = new google.visualization.LineChart(chart_div);
-	chart.draw(formatted_data, options);
+	if (data.length > 0) {
+		chart.draw(formatted_data, options);
+	}
 }
 
 
