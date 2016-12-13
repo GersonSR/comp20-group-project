@@ -1,5 +1,13 @@
 var serverURL = "https://find-the-way.herokuapp.com";
 
+var supportivePhrases = [
+"Hey, you did it buddy!",
+"Way to go!",
+"You go!",
+"We're so proud of you!",
+"We couldn't do it better"
+];
+
 // Current Game Stats
 var score;
 var gameMode;
@@ -433,6 +441,22 @@ function playGame(origin, destination) {
 
 // score is a global variable
 function displayScoreOnModal() {
+   scoreModalHeader = document.getElementById('modal_new_score_header');
+  $(scoreModalHeader).empty();
+  $('<span/>',{
+    style: 'display: inline-block;',
+    class: 'glyphicon glyphicon-thumbs-up',
+    text: ''
+  }).appendTo(scoreModalHeader);
+  $('<div/>',{
+    style:'display: inline-block;',
+    text: supportivePhrases[ getRandomInt(0,supportivePhrases.length)]
+  }).appendTo(scoreModalHeader);
+  $('<span/>',{
+    style: 'display: inline-block;',
+    class: 'glyphicon glyphicon-thumbs-up',
+    text: ''
+  }).appendTo(scoreModalHeader); 
   scoreModal = document.getElementById('modal_new_score_display');
   $(scoreModal).empty();
   $('<p/>', {
