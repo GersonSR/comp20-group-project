@@ -441,10 +441,11 @@ function playGame(origin, destination) {
 
 // score is a global variable
 function displayScoreOnModal() {
-   scoreModalHeader = document.getElementById('modal_new_score_header');
+
+  scoreModalHeader = document.getElementById('modal_new_score_header');
   $(scoreModalHeader).empty();
   $('<span/>',{
-    style: 'display: inline-block;',
+    style: 'display: inline-block;padding-right:10px;',
     class: 'glyphicon glyphicon-thumbs-up',
     text: ''
   }).appendTo(scoreModalHeader);
@@ -453,10 +454,11 @@ function displayScoreOnModal() {
     text: supportivePhrases[ getRandomInt(0,supportivePhrases.length)]
   }).appendTo(scoreModalHeader);
   $('<span/>',{
-    style: 'display: inline-block;',
+    style: 'display: inline-block;padding-left:10px;',
     class: 'glyphicon glyphicon-thumbs-up',
     text: ''
   }).appendTo(scoreModalHeader); 
+
   scoreModal = document.getElementById('modal_new_score_display');
   $(scoreModal).empty();
   $('<p/>', {
