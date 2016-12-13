@@ -122,6 +122,7 @@ function clearMap() {
     destinationMarker.setMap(null);
     destinationMarker = undefined;
   }
+  $( "#legend" ).empty();
 }
 
 /*
@@ -260,11 +261,11 @@ function playGame(origin, destination) {
   var icons = {
     Start: {
       name: 'Start',
-      icon: iconBase + 'A.png'
+      icon: 'walkingman.png'
     },
     End: {
       name: 'End',
-      icon: iconBase + 'B.png'
+      icon: 'target.png'
     },
   };
 
@@ -398,8 +399,8 @@ function playGame(origin, destination) {
     });
   }
 
-    // Custom Legend Code
-  var legend = '';
+  // Custom Legend Code
+  $( "#legend" ).empty();
   var legend = document.getElementById('legend');
   for (var key in icons) {
     var type = icons[key];
@@ -407,9 +408,9 @@ function playGame(origin, destination) {
     var icon = type.icon;
     var div = document.createElement('div');
     div.innerHTML = '<img src="' + icon + '"> ' + name;
-    legend.appendChild(div);
+    $( "#legend" ).append(div);
   }
-  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(legend);
 
 }
 
