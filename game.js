@@ -256,22 +256,36 @@ function setUpMap() {
 function playGame(origin, destination) {
   // Recenter the map halfway between the two points
   map.setCenter(google.maps.geometry.spherical.interpolate(origin, destination, 0.5));
+  var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
+  var icons = {
+    Start: {
+      name: 'Start',
+      icon: iconBase + 'A.png'
+    },
+    End: {
+      name: 'End',
+      icon: iconBase + 'B.png'
+    },
+  };
 
   originMarker = new google.maps.Marker({
     draggable: true, // let the user drag this marker
     position: origin,
-    label: '↝', // placeholder
+    //label: '↝', // placeholder
     title: 'Drag here to draw your route!',
+    icon: icons['Start'].icon,
     map: map
   });
 
   destinationMarker = new google.maps.Marker({
     draggable: false,
     position: destination,
-    label: '↯', // placeholder
+    //label: '↯', // placeholder
     title: 'Your route will end here.',
+    icon: icons['End'].icon,
     map: map
   });
+
 
   drawnRoute = new google.maps.Polyline({
     geodesic: true,
@@ -383,6 +397,20 @@ function playGame(origin, destination) {
       }
     });
   }
+
+    // Custom Legend Code
+  var legend = '';
+  var legend = document.getElementById('legend');
+  for (var key in icons) {
+    var type = icons[key];
+    var name = type.name;
+    var icon = type.icon;
+    var div = document.createElement('div');
+    div.innerHTML = '<img src="' + icon + '"> ' + name;
+    legend.appendChild(div);
+  }
+  map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(legend);
+
 }
 
 // score is a global variable
