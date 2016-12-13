@@ -28,6 +28,18 @@ var gameSettings = {
   }
 }
 
+var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
+var icons = {
+  origin: {
+    name: 'Start',
+    icon: 'walkingman.png'
+  },
+  destination: {
+    name: 'End',
+    icon: 'target.png'
+  }
+};
+
 // Handle geolocation errors
 function handle_geo_error(hasGeolocation)
 {
@@ -49,6 +61,13 @@ $(document).ready(function() {
   directionsService = new google.maps.DirectionsService();
   setUpMap();
   placesService = new google.maps.places.PlacesService(map);
+
+  // Custom Legend Code
+
+  // removed since it was changins styling
+  // map.controls[google.maps.ControlPosition.LEFT_TOP].push(document.getElementById('legend'));
+  setUpLegend(null, null);
+  
 
   $("#score-modal").submit(function(event) {
     event.preventDefault();
@@ -100,6 +119,7 @@ function begin_game(difficulty) {
         	} else {
           	playGame(args.place_1.geometry.location,
             	args.place_2.geometry.location);
+            setUpLegend(args.place_1.name, args.place_2.name);
         	}
     	});
 }
@@ -122,7 +142,7 @@ function clearMap() {
     destinationMarker.setMap(null);
     destinationMarker = undefined;
   }
-  $( "#legend" ).empty();
+  setUpLegend(null, null);
 }
 
 /*
@@ -251,30 +271,40 @@ function setUpMap() {
   map = new google.maps.Map(document.getElementById('map'), mapOptions);
 }
 
+
+function setUpLegend(originName, destinationName) {
+  legend = $('#legend');
+  legend.empty();
+
+  $('<img/>', {
+    src: icons.origin.icon,
+  }).appendTo(legend);
+  if (originName) {
+    legend.append(document.createTextNode(originName));
+  }
+  $('<br/>').appendTo(legend);
+
+  $('<img/>', {
+    src: icons.destination.icon,
+  }).appendTo(legend);
+  if (destinationName) {
+    legend.append(document.createTextNode(destinationName));
+  }
+}
+
 /*
  * Begin the game. The two parameters must be given as LatLngs
  */
 function playGame(origin, destination) {
   // Recenter the map halfway between the two points
   map.setCenter(google.maps.geometry.spherical.interpolate(origin, destination, 0.5));
-  var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
-  var icons = {
-    Start: {
-      name: 'Start',
-      icon: 'walkingman.png'
-    },
-    End: {
-      name: 'End',
-      icon: 'target.png'
-    },
-  };
 
   originMarker = new google.maps.Marker({
     draggable: true, // let the user drag this marker
     position: origin,
     //label: '↝', // placeholder
     title: 'Drag here to draw your route!',
-    icon: icons['Start'].icon,
+    icon: icons.origin.icon,
     map: map
   });
 
@@ -283,7 +313,7 @@ function playGame(origin, destination) {
     position: destination,
     //label: '↯', // placeholder
     title: 'Your route will end here.',
-    icon: icons['End'].icon,
+    icon: icons.destination.icon,
     map: map
   });
 
@@ -398,19 +428,6 @@ function playGame(origin, destination) {
       }
     });
   }
-
-  // Custom Legend Code
-  $( "#legend" ).empty();
-  var legend = document.getElementById('legend');
-  for (var key in icons) {
-    var type = icons[key];
-    var name = type.name;
-    var icon = type.icon;
-    var div = document.createElement('div');
-    div.innerHTML = '<img src="' + icon + '"> ' + name;
-    $( "#legend" ).append(div);
-  }
-  map.controls[google.maps.ControlPosition.LEFT_TOP].push(legend);
 
 }
 
