@@ -443,7 +443,7 @@ function displayScoreOnModal() {
     class: 'modalContentInfo',
     text: 'Difficulty: ' + difficulty
   }).appendTo(scoreModal);
-  $("#score-modal").modal('toggle');
+  $("#score-modal").modal({backdrop: 'static', keyboard: false});
 }
 
 function sendGameData( scoreToSend, difficultyToSend, usernameToSend ){
