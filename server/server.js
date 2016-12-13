@@ -6,10 +6,16 @@
 
 /* Initizlization of global package objects */
 var express = require('express');
+var compress = require('compression');
 var cors    = require('cors');
 var mongo   = require('mongodb').MongoClient, format = require('util').format;
 var body_parser = require('body-parser');
 var app = express();
+
+/* Serve the static content */
+var oneDay = 86400000;
+app.use(compress());
+app.use(express.static(__dirname + '/public', { maxAge: oneDay }));
 
 /* Set up body-parser to handle request parameters */
 app.use(body_parser.json());
@@ -35,7 +41,7 @@ app.post('/submit', cors(), function(req, resp) {
 	 *
 	 * {
 	 * 		username: ,
-	 *		game_mode: ,
+	 *		difficulty: ,
 	 *  	score: ,
 	 *		time: ,
 	 * }
@@ -59,21 +65,25 @@ app.post('/submit', cors(), function(req, resp) {
 
 	 /* Get out all request parameters */
 	 var username  = req.body.username;
-	 var game_mode = req.body.game_mode;
+	 var difficulty = req.body.difficulty;
 	 var score     = req.body.score;
 
-	 if (username != undefined && game_mode != undefined && score != undefined &&
-	 	                         (game_mode === "easy" || game_mode === "hard" ||
-	 	                       	  game_mode === "local")) {
+	 if (username != undefined && difficulty != undefined && score != undefined &&
+	 	                         (difficulty === "easy" || difficulty === "hard" ||
+	 	                       	  difficulty === "local")) {
 	 	username  = username.replace(/[^\w\s]/gi, '');
-	 	game_mode = game_mode.replace(/[^\w\s]/gi, '');
+	 	difficulty = difficulty.replace(/[^\w\s]/gi, '');
 	 	score     = Number(score); /* TODO: MAKE SURE THEY AREN'T FILTHY CHEATERS BY CALCULATING SCORE ON SERVER-SIDE */
+
+	 	if (username === "") {
+	 		username = "Anonymous";
+	 	}
 
 	 	/* Build document to store in database */
 	 	var d = new Date();
 	 	var document = {
 	 		"username": username,
-	 		"game_mode": game_mode,
+	 		"difficulty": difficulty,
 	 		"score": score,
 	 		"time": d.toUTCString(), /* Makes the date and time look reasonable */
 	 	};
@@ -114,14 +124,14 @@ app.get('/high-scores', cors(), function(req, resp) {
 	 * comparison against a fixed set of valid inputs. This of course prevents
 	 * script-based attacks and only deals with data we want to be dealt with.
 	 */
-	 var game_mode = req.query.game_mode;
+	 var difficulty = req.query.difficulty;
 	 
-	 if (game_mode === undefined) {
+	 if (difficulty === undefined) {
 	 	resp.send("[]");
 	 } else {
 	 	db.collection('userdata', function(er, coll) {
 	 		coll.find({
-	 			"game_mode": game_mode
+	 			"difficulty": difficulty
 	 		}).sort({
 	 			score: -1
 	 		}).toArray(function(err, docs) {

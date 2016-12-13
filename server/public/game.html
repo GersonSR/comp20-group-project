@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta name="viewport" content="initial-scale=1.0 user-scalable=no"/>
+	<title>Find the Way!</title>
+	<link rel="stylesheet" href="style.css" type="text/css"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCxR4v3jD69n52IxeE_3GOsw_ZMyLJI8dI&amp;libraries=places,geometry"></script>
+	<script type="text/javascript" src="game.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Find the Way!</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="game.html">Game<span class="sr-only">(current)</span></a></li>
+        <li><a href="stats.html">Leaderboard</a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+
+<div id="map"></div>
+
+<div id="legend" class="hidden-xs"></div>
+<button id="restart-button" onclick="$('#setup-modal').modal('toggle');">Restart</button>
+
+
+<!-- new score modal -->
+<div class="modal fade" id="score-modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:10px 25px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 id = 'modal_new_score_header'>
+	          <span class="glyphicon glyphicon-thumbs-up"></span>
+	          <span class="glyphicon glyphicon-thumbs-up"></span>
+	          <span class="glyphicon glyphicon-thumbs-up"></span>
+	          Hey great score buddy!
+	          <span class="glyphicon glyphicon-thumbs-up"></span>
+	          <span class="glyphicon glyphicon-thumbs-up"></span>
+	          <span class="glyphicon glyphicon-thumbs-up"></span>
+          </h4>
+        </div>
+        <div class="modal-body" style="padding:10px 12px;">
+        <p id="modal_new_score_display"></p>
+          <form role="form" id="score_submit_form">
+            <div class="form-group">
+              <label for="username_input">Username</label>
+              <input type="text" class="form-control" id="username_input" name="score_username">
+            </div>
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-send"></span>&nbsp;&nbsp;Submit Score and Play Again</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+
+<!-- new setip modal -->
+<div class="modal fade" id="setup-modal" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:10px 25px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4>Select Difficulty</h4>
+        </div>
+        <div class="modal-body" style="padding:10px 12px;">
+        <p id="modal_new_score_display"></p>
+          <form role="form" id="difficulty-select-form">
+            <div class="form-group">
+              <input type="radio" value="easy" name="difficulty"/>Easy<br/>
+              <input type="radio" value="hard" name="difficulty"/>Hard<br/>
+              <input type="radio" value="local" name="difficulty" checked/>Local (Scores will only be saved locally!)<br/>
+            </div>
+              <button type="submit" class="btn btn-success btn-block" action="">Start Game</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
