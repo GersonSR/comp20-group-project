@@ -52,7 +52,9 @@ function build_table(difficulty) {
 	table += "</tbody></table>"
 	leaderboard.innerHTML = title + table;
 
-	render_chart();
+	if (data.length > 0) {
+		render_chart();
+	}
 }
 
 function render_chart() {
